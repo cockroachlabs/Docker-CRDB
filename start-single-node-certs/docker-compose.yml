@@ -1,0 +1,19 @@
+version: '3.5'
+
+volumes:
+  cockroach-data:
+
+services:
+
+  crdb:
+    container_name: w2m-cockroach01
+    image: cockroachdb/cockroach:v22.1.1
+    hostname: cockroach01
+    environment:
+      - MySampleVar=MySampleVal
+    volumes:
+      - cockroach-data:${PWD}/cockroach-data
+    command: start-single-node --insecure
+    ports:
+      - "8080:8080"
+      - "26257:26257"

@@ -1,3 +1,6 @@
+# CRDB CockroachDB default data store
+cockroach-data
+
 # Logs
 logs
 *.log
