@@ -30,6 +30,7 @@ docker network create w2m-crdb-net
 Connect to the instance:
 cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable"
 
+cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable" workload init movr
 
 
 
