@@ -1,19 +1,27 @@
 version: '3.5'
 
 volumes:
-  cockroach-data:
+  certs_data: {}
+  ca_data: {}
 
 services:
 
   crdb:
-    container_name: w2m-cockroach01
     image: cockroachdb/cockroach:v22.1.1
-    hostname: cockroach01
+    container_name: w2m-cockroach01c
+    hostname: cockroach01c
     environment:
       - MySampleVar=MySampleVal
     volumes:
-      - cockroach-data:${PWD}/cockroach-data
-    command: start-single-node --insecure
+      - "${PWD}/cockroach-data/crdb:/cockroach/cockroach-data"
+      - certs_data:/certs
+      - ca_data:/ca
+    command: start-single-node --certs-dir=./certs
     ports:
       - "8080:8080"
       - "26257:26257"
+
+networks:
+  default:
+    external:
+      name: w2m-crdb-net

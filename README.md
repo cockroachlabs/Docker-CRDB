@@ -30,8 +30,6 @@ docker network create w2m-crdb-net
 Connect to the instance:
 cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable"
 
-cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable" workload init movr
-
 
 
 Prometheus Portal: localhost:9090
@@ -45,4 +43,12 @@ https://www.tutorialworks.com/container-networking/
 
 Simulate CRDB multi-region cluster on localhost
 https://www.cockroachlabs.com/blog/simulate-cockroachdb-cluster-localhost-docker/
+
+
+
+
+
+SECURED (start-single-node-certs) details:
+
+cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslcert=docker-certs%2Fclient.root.crt&sslkey=docker-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=docker-certs%2Fca.crt"
 

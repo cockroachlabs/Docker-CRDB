@@ -25,13 +25,13 @@ scrape_configs:
   - job_name: 'cockroachdb'
     metrics_path: '/_status/vars'
     # Insecure mode:
-    scheme: 'http'
+    # scheme: 'http'
     # Secure mode:
-    # scheme: 'https'
+    scheme: 'https'
     tls_config:
       insecure_skip_verify: true
 
     static_configs:
-    - targets: ['cockroach01:8080']
+    - targets: ['cockroach01c:8080']
       labels:
         cluster: 'my-cockroachdb-cluster'
