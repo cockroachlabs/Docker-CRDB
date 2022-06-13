@@ -1,5 +1,8 @@
 # CRDB CockroachDB default data store
 cockroach-data
+output
+localhost-ca
+localhost-certs
 
 # Logs
 logs
