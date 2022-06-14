@@ -6,8 +6,6 @@ services:
     image: grafana/loki:2.5.0
     container_name: loki-on-3100
     hostname: loki3100
-#    ports:
-#      - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
     
 networks:
