@@ -46,4 +46,3 @@ sinks:
 capture-stray-errors:
   enable: true
   max-group-size: 100MiB
-

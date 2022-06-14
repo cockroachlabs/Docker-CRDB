@@ -52,3 +52,12 @@ SECURED (start-single-node-certs) details:
 
 cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslcert=docker-certs%2Fclient.root.crt&sslkey=docker-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=docker-certs%2Fca.crt"
 
+
+
+
+cockroach sql --url "postgresql://mark@localhost:26257?sslcert=%2Fcockroach%2Flocalhost-certs%2Fclient.root.crt&sslkey=%2Fcockroach%2Flocalhost-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=localhost-certs%2Fca.crt"
+
+
+cockroach workload init bank "postgresql://mark:zlamal@localhost:26257?sslcert=%2Fcockroach%2Flocalhost-certs%2Fclient.root.crt&sslkey=%2Fcockroach%2Flocalhost-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=localhost-certs%2Fca.crt"
+
+cockroach workload run bank "postgresql://mark:zlamal@localhost:26257?sslcert=%2Fcockroach%2Flocalhost-certs%2Fclient.root.crt&sslkey=%2Fcockroach%2Flocalhost-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=localhost-certs%2Fca.crt"

@@ -7,8 +7,8 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
-    hostname: prometheus01
+    container_name: prometheus-on-9090
+    hostname: prometheus9090
     environment:
       - MySampleVar=MySampleVal
     volumes:

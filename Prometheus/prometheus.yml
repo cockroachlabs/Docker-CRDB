@@ -32,6 +32,6 @@ scrape_configs:
       insecure_skip_verify: true
 
     static_configs:
-    - targets: ['cockroach01c:8080']
+    - targets: ['crdb-node01:8080']
       labels:
         cluster: 'my-cockroachdb-cluster'

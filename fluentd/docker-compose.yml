@@ -6,12 +6,9 @@ services:
 
 #   This is for the FS version
 #   image: fluent/fluentd:latest
-
 #   This is for the LOKI version
-#    image: fluent/fluentd:latest
     image: grafana/fluent-plugin-loki:master
-
-    container_name: fluent-5170-to-3100
+    container_name: fluent-on-5170
     hostname: fluent5170
     volumes:
       - ./fluent-to-fs.conf:/fluentd/etc/fluent-to-fs.conf

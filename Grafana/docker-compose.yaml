@@ -4,6 +4,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
+    container_name: grafana-on-3000
     ports:
       - "3000:3000"
 
