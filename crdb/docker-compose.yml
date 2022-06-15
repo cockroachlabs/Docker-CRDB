@@ -14,10 +14,10 @@ services:
       - MySampleVar=MySampleVal
     volumes:
       - "${PWD}/localhost-certs:/cockroach/localhost-certs"
-      - "${PWD}/fluentd-crdb-v2-log.yaml:/cockroach/fluentd-crdb-v2-log.yaml"
+      - "${PWD}/crdb-fluent.yaml:/cockroach/crdb-fluent.yaml"
       - "${PWD}/cockroach-data:/cockroach/cockroach-data"
     command:
-      start-single-node --advertise-addr=localhost --certs-dir=/cockroach/localhost-certs --log-config-file=/cockroach/fluentd-crdb-v2-log.yaml
+      start-single-node --advertise-addr=localhost --certs-dir=/cockroach/localhost-certs --log-config-file=/cockroach/crdb-fluent.yaml
     ports:
       - "8080:8080"
       - "26257:26257"
