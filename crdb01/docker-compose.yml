@@ -8,16 +8,22 @@ services:
 
   crdb:
     image: cockroachdb/cockroach:v22.1.1
-    container_name: crdb-node
-    hostname: crdb-node
+    container_name: crdb-node01
+    hostname: crdb-node01
     environment:
       - MySampleVar=MySampleVal
     volumes:
-      - "${PWD}/localhost-certs:/cockroach/localhost-certs"
+      - "${PWD}/certs:/cockroach/certs"
       - "${PWD}/crdb-fluent.yaml:/cockroach/crdb-fluent.yaml"
       - "${PWD}/cockroach-data:/cockroach/cockroach-data"
-    command:
-      start-single-node --advertise-addr=localhost --certs-dir=/cockroach/localhost-certs --log-config-file=/cockroach/crdb-fluent.yaml
+    command: >
+      start
+        --advertise-addr=crdb-node01
+        --listen-addr=crdb-node01:26257
+        --http-addr=crdb-node01:8080
+        --join=crdb-node01:26257,crdb-node02:26257,crdb-node03:26257
+        --certs-dir=/cockroach/certs
+        --log-config-file=/cockroach/crdb-fluent.yaml
     ports:
       - "8080:8080"
       - "26257:26257"

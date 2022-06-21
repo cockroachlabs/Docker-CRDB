@@ -1,0 +1,31 @@
+
+version: "3.5"
+
+services:
+  fluentd:
+
+#   This is for the FS version
+#   image: fluent/fluentd:latest
+
+#   This is for the LOKI version
+    image: grafana/fluent-plugin-loki:master
+
+    container_name: fluent-02
+    hostname: fluent-02
+    volumes:
+      # Only used when FS is selected
+      - ./fluent-to-fs.conf:/fluentd/etc/fluent-to-fs.conf
+
+      - ./fluent-to-loki.conf:/fluentd/etc/fluent-to-loki.conf
+
+      # Only used when FS is selected
+      - "${PWD}/output:/fluentd/output"
+    environment:
+#      Uncomment this for FS writes to the output folder
+#      - FLUENTD_CONF=fluent-to-fs.conf
+#      Uncomment this for TCP writes to the LOKI sink
+      - FLUENTD_CONF=fluent-to-loki.conf
+networks:
+  default:
+    external:
+      name: w2m-crdb-net

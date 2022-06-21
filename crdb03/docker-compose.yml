@@ -1,0 +1,34 @@
+version: '3.5'
+
+volumes:
+  certs_data: {}
+  ca_data: {}
+
+services:
+
+  crdb:
+    image: cockroachdb/cockroach:v22.1.1
+    container_name: crdb-node03
+    hostname: crdb-node03
+    environment:
+      - MySampleVar=MySampleVal
+    volumes:
+      - "${PWD}/certs:/cockroach/certs"
+      - "${PWD}/crdb-fluent.yaml:/cockroach/crdb-fluent.yaml"
+      - "${PWD}/cockroach-data:/cockroach/cockroach-data"
+    command: >
+      start
+        --advertise-addr=crdb-node03
+        --listen-addr=crdb-node03:26257
+        --http-addr=crdb-node03:8080
+        --join=crdb-node01:26257,crdb-node02:26257,crdb-node03:26257
+        --certs-dir=/cockroach/certs
+        --log-config-file=/cockroach/crdb-fluent.yaml
+    ports:
+      - "8082:8080"
+      - "26259:26257"
+
+networks:
+  default:
+    external:
+      name: w2m-crdb-net

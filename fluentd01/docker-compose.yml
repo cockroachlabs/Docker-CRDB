@@ -10,8 +10,8 @@ services:
 #   This is for the LOKI version
     image: grafana/fluent-plugin-loki:master
 
-    container_name: fluent-on-5170
-    hostname: fluent5170
+    container_name: fluent-01
+    hostname: fluent-01
     volumes:
       # Only used when FS is selected
       - ./fluent-to-fs.conf:/fluentd/etc/fluent-to-fs.conf
