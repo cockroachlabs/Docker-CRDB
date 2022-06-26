@@ -1,0 +1,15 @@
+{
+  "name": "docker_nodejs_alerts",
+  "version": "1.0.0",
+  "description": "Node.js on Docker running alerts",
+  "author": "Mark Zlamal, Cockroach Labs",
+  "main": "MyApp",
+  "scripts": {
+    "start": "node MyApp"
+  },
+  "dependencies": {
+    "ejs": "latest",
+    "@sendgrid/mail": "latest",
+    "twilio": "latest"
+  }
+}

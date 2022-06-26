@@ -1,0 +1,17 @@
+
+version: "3.5"
+
+services:
+  alerts:
+    build:
+      context: .
+    container_name: alerts
+    hostname: alerts
+    environment:
+      - PORT=4567
+    ports:
+      - "4567:4567"
+networks:
+  default:
+    external:
+      name: w2m-crdb-net
