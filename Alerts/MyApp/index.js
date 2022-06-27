@@ -132,14 +132,14 @@ function ExtractAlertDetails(alertObject) {
     // A typical valueString (alertObject.valueString):
     // [ var='B0' metric='Value' labels={cluster=my-cockroachdb-cluster, instance=crdb-node02:8080, job=cockroachdb} value=0.11785714285714284 ]
 
-    if(!alertObject.valueString) {
+    if (!alertObject.valueString) {
         // Grafana bug: valueString is prepended with a comma... weird.
         return;
     }
 
     const valueStr = alertObject.valueString.trim();
 
-    if(valueStr.length <= 0) {
+    if (valueStr.length <= 0) {
         return;
     };
 
@@ -160,7 +160,7 @@ function ExtractAlertDetails(alertObject) {
 
 
 async function SendSMS(alertObject, alertDetails) {
-    if(!alertDetails) {
+    if (!alertDetails) {
         return;
     };
 
@@ -174,18 +174,22 @@ async function SendSMS(alertObject, alertDetails) {
         return;
     };
 
-    if (alertObject.labels.SMS_Key) {
-        const SMS_Key_Split = alertObject.labels.SMS_Key.split(':');
-        const liveAccountSid = SMS_Key_Split[0];
-        const liveAuthToken = SMS_Key_Split[1];
+    if (!alertObject.labels.SMS_Key) {
+        return;
+    };
 
-        const SMSBody = [];
-        SMSBody.push(alertObject.labels.alertname);
-        for (const [k, v] of Object.entries(alertDetails)) {
-            SMSBody.push(`${k}: ${v}`);
-        }
-        SMSBody.push(`Trigger caused by: ${alertObject.generatorURL}`);
+    const SMS_Key_Split = alertObject.labels.SMS_Key.split(':');
+    const liveAccountSid = SMS_Key_Split[0];
+    const liveAuthToken = SMS_Key_Split[1];
 
+    const SMSBody = [];
+    SMSBody.push(alertObject.labels.alertname);
+    for (const [k, v] of Object.entries(alertDetails)) {
+        SMSBody.push(`${k}: ${v}`);
+    }
+    SMSBody.push(`Trigger caused by: ${alertObject.generatorURL}`);
+
+    if (!alertObject.labels.DisableNotifications) {
         const MyTwilio = require('twilio');
         const MyTwilioClient = MyTwilio(liveAccountSid, liveAuthToken);
         const twilioResult = await MyTwilioClient.messages.create({
@@ -204,7 +208,7 @@ async function SendSMS(alertObject, alertDetails) {
 
 
 async function SendEmail(alertObject, alertDetails) {
-    if(!alertDetails) {
+    if (!alertDetails) {
         return;
     };
 
@@ -250,9 +254,12 @@ async function SendEmail(alertObject, alertDetails) {
         html: htmlEmail.join('')
     };
 
-    const MySendGridInterface = require('@sendgrid/mail');
-    MySendGridInterface.setApiKey(alertObject.labels.Sendgrid_Api_Key);
-    const emailResult = await MySendGridInterface.send(myEmailObj);
+
+    if (!alertObject.labels.DisableNotifications) {
+        const MySendGridInterface = require('@sendgrid/mail');
+        MySendGridInterface.setApiKey(alertObject.labels.Sendgrid_Api_Key);
+        const emailResult = await MySendGridInterface.send(myEmailObj);
+    };
 
     InsertLogItem(
         `Sent Email to ${alertObject.labels.Email}`,
