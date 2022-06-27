@@ -17,3 +17,11 @@ Both build the image if it doesn't exist.
 Localhost running & Dev:
 
 PORT=4567 node .
+
+
+
+Alerting contact point for CONTAINER
+http://alerts:4567
+
+Alerting contact point for localhost DEVELOPMENT
+http://host.docker.internal:4568
