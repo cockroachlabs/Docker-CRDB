@@ -1,5 +1,6 @@
 # Docker-CRDB
- 
+
+
 Start a Cluster in Docker
 
 https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.html
@@ -7,6 +8,10 @@ https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.ht
 dockerhub cockroachdb/cockroach
 
 https://hub.docker.com/r/cockroachdb/cockroach
+
+
+
+<img src="images/overall-arch" alt="Arhitecture" width="600px"/>
 
 
 Steps:
@@ -71,3 +76,8 @@ cockroach workload run bank "postgresql://root@crdb-node02:26257/bank?sslcert=%2
 
 // NODE 03 Example
 cockroach workload run bank "postgresql://root@crdb-node03:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
+
+
+
+<img src="images/cl-labs.webp" alt="Cockroach Labs" width="300px"/>
+
