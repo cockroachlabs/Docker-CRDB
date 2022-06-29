@@ -11,7 +11,7 @@ https://hub.docker.com/r/cockroachdb/cockroach
 
 
 
-<img src="images/overall-arch.svg" alt="Architecture" width="600px"/>
+<img src="images/architecture-3-Node.svg" alt="Architecture" width="50%"/>
 
 
 Steps:
