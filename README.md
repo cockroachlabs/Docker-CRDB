@@ -10,9 +10,9 @@ dockerhub cockroachdb/cockroach
 https://hub.docker.com/r/cockroachdb/cockroach
 
 
-
-<img src="images/architecture-3-Node.png" alt="Architecture" width="50%"/>
-
+<div style="text-align: center;">
+<img src="images/architecture-3-Node.png" alt="Architecture" />
+</div>
 
 Steps:
 
