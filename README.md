@@ -1,5 +1,9 @@
 # Docker-CRDB
 
+This repo encapsulates an operational CockroachDB environment with built-in logging and monitoring.
+I've integrated Grafana, Prometheus, Fluentd, and LOKI to capture the logging and metrics from CRDB.
+
+Also included is Alerting which is connected via WebHooks from Grafana to a running "Alerts" container that fire requests to Twilio (SMS message notifications), and SendGrid (Email notificatios))
 
 Start a Cluster in Docker
 
@@ -10,9 +14,9 @@ dockerhub cockroachdb/cockroach
 https://hub.docker.com/r/cockroachdb/cockroach
 
 
-<div style="text-align: center;">
-<img src="images/architecture-3-Node.png" alt="Architecture" />
-</div>
+<p align="center">
+<img src="images/architecture-3-Node.png" alt="Architecture" width="75%">
+</p>
 
 Steps:
 
@@ -79,5 +83,6 @@ cockroach workload run bank "postgresql://root@crdb-node03:26257/bank?sslcert=%2
 
 
 
-<img src="images/cl-labs.webp" alt="Cockroach Labs" width="300px"/>
-
+<p align="center">
+<img src="images/cl-labs.webp" alt="Cockroach Labs" width="250px"/>
+</p>
