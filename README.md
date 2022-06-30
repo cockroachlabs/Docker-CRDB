@@ -1,7 +1,7 @@
 # Docker-CRDB
 
-This repo encapsulates an operational CockroachDB environment with built-in logging and monitoring.
-I've integrated Grafana, Prometheus, Fluentd, and LOKI to capture the logging and metrics from CRDB.
+This repo encapsulates a multi-node CockroachDB environment with integrated logging and monitoring.
+Containerized components such as Grafana, Prometheus, Fluentd, and LOKI are configured and used to capture the logging and metrics originating from the CRDB cluster.
 
 Also included is *Alerting* which is connected via WebHooks from Grafana to a running "Alerts" container that fire requests to Twilio (SMS message notifications), and SendGrid (Email notifications).
 The *altering* container is a NodeJS web app, shown in the second architecture below.
@@ -18,7 +18,7 @@ Generally speaking each container is driving a single image here for simplicity 
 <img src="images/architecture-3-Node.png" alt="Architecture" width="75%">
 </p>
 
-## alerting components ##
+## Alerting components ##
 Alerting was separated from the core architecture because it's an optional capability and requires service keys from 3rd party cloud services.
 In this example, Twilio is used to send email and SMS messages when Grafana triggers are defined.
 
@@ -48,7 +48,7 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
     - For a general overview into generating self-signed certificates, visit https://www.cockroachlabs.com/docs/v22.1/cockroach-cert 
     - The **certs list** command in the last step should return the list of certificates similar to this:
     ```
-    markzlamal@crlMBP-C02FL0LJMD6TMzE1 crdb01 % cockroach --certs-dir=certs cert list 
+    markzlamal@crl_my_laptop crdb01 % cockroach --certs-dir=certs cert list 
     Certificate directory: certs
     Usage  | Certificate File |    Key File     |  Expires   |                     Notes                      | Error
     ---------+------------------+-----------------+------------+------------------------------------------------+--------
