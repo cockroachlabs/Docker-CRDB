@@ -13,12 +13,15 @@ This is a complete platform that's running in a Docker environment, leveraging a
 This project is divided into distict containers to showcase the separation of duty and isolation of components.
 Generally speaking each container is driving a single image here for simplicity and consistency, but it makes sense to group certain services together (eg: CRDB + Fluentd) that share logical services and have tight dependencies.
 
-##core architecture##
+## Core components ##
 <p align="center">
 <img src="images/architecture-3-Node.png" alt="Architecture" width="75%">
 </p>
 
-##alerting components##
+## alerting components ##
+Alerting was separated from the core architecture because it's an optional capability and requires service keys from 3rd party cloud services.
+In this example, Twilio is used to send email and SMS messages when Grafana triggers are defined.
+
 <p align="center">
 <img src="images/alerting.png" alt="Architecture" width="75%">
 </p>
@@ -31,15 +34,16 @@ Generally speaking each container is driving a single image here for simplicity 
     Please visit https://github.com/cockroachdb/cockroach and download the latest CRDB installation (22.1.0 at the time of this commit)
 * **Certificates for secure mode:**
     - Cheat sheet on certificate creation for this project:
-      - ```
+      ```
       // in the crdb01 folder:
       mkdir certs
       mkdir ca
       cockroach cert create-ca --certs-dir=certs --ca-key=ca/ca.key
       cockroach cert create-node crlMBP-C02FL0LJMD6TMzE1.local --ca-key=ca/ca.key --certs-dir=certs
       cockroach cert create-client root --certs-dir=certs --ca-key=ca/ca.key
+
       ```
-    - dulpicate the ** **ca** ** and ** **certs** folders for the crdb02 and crdb03
+    - dulpicate the ***ca*** and ***certs*** folders for the **crdb02** and **crdb03** containers
     - For a general overview into generating self-signed certificates, visit https://www.cockroachlabs.com/docs/v22.1/cockroach-cert 
 * 
     
@@ -52,12 +56,12 @@ Different sequences will work, but you will needlessly generate logging related 
 2. LOKI
 3. Prometheus
 4. Grafana
-5. fluentd01 (*relies on **LOKI** *)
-6. fluentd02 (*relies on **LOKI** *)
-7. fluentd03 (*relies on **LOKI** *)
-8. crdb01 (*relies on **fluentd01** *)
-9. crdb02 (*relies on **fluentd2** *)
-10. crdb03 (*relies on **fluentd03** *)
+5. fluentd01 (_relies on **LOKI**_)
+6. fluentd02 (_relies on **LOKI**_)
+7. fluentd03 (_relies on **LOKI**_)
+8. crdb01 (_relies on **fluentd01**_)
+9. crdb02 (_relies on **fluentd2**_)
+10. crdb03 (_relies on **fluentd03**_)
 
 
 https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.html
