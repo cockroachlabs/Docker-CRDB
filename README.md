@@ -82,7 +82,7 @@ Different sequences will work, but you will needlessly generate logging related 
 Each component folder contains a **docker-compose.yml** file that is the descriptor for the container & image.
 
 
-1. git clone https://github.com/world2mark/Docker-CRDB.git
+1. git clone https://github.com/cockroachlabs/Docker-CRDB.git
 
 2. Create a user-defined bridge network
     ```
@@ -129,4 +129,6 @@ Note that the **alerts** container is built, while the others are pulled from pu
 
 <p align="center">
 <img src="images/cl-labs.webp" alt="Cockroach Labs" width="250px"/>
+<br>
+<span>Mark Zlamal, June 2022, Cockroach Labs</span>
 </p>

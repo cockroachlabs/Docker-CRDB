@@ -48,3 +48,9 @@ Alerting contact point within the private network
 
 Alerting contact point for localhost access
 - http://localhost:4567
+
+<p align="center">
+<img src="../images/cl-labs.webp" alt="Cockroach Labs" width="250px"/>
+<br>
+<span>Mark Zlamal, June 2022, Cockroach Labs</span>
+</p>
