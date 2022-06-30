@@ -45,7 +45,6 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
 
       ```
     - dulpicate the ***ca*** and ***certs*** folders for the **crdb02** and **crdb03** containers
-    - For a general overview into generating self-signed certificates, visit https://www.cockroachlabs.com/docs/v22.1/cockroach-cert 
     - The **certs list** command in the last step should return the list of certificates similar to this:
     ```
     markzlamal@crl_my_laptop crdb01 % cockroach --certs-dir=certs cert list 
@@ -58,7 +57,7 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
     (3 rows)
     ```
 
-## Start a Cluster in Docker
+## Start the cluster + logging in Docker
 The *start sequence* of your containers is important due to the networking expectations between the components.
 This project expects containers to be launched in the following order.
 Different sequences will work, but you will needlessly generate logging related to temporary network connection problems as the contaners establish connections.
@@ -73,31 +72,24 @@ Different sequences will work, but you will needlessly generate logging related 
 9. crdb02 (_relies on **fluentd2**_)
 10. crdb03 (_relies on **fluentd03**_)
 
-
-https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.html
-
-dockerhub cockroachdb/cockroach
-
-https://hub.docker.com/r/cockroachdb/cockroach
+Each component folder contains a **docker-compose.yml** file that is the descriptor for the container & image.
 
 
-
-Steps:
 
 1. git clone https://github.com/world2mark/Docker-CRDB.git
 
-
-
-
 2. Create a user-defined bridge network
-docker network create w2m-crdb-net
+    ```
+    docker network create w2m-crdb-net
 
+    ```
+Additional options can be specified to define a unique subnet range if desired.
 
+3. In each folder (eg: Loki, Prometheus, fluentd01, etc), running this command will create and start the associated container.
+    ```
+    docker-compose up -d
 
-
-3. docker-compose up -d
-
-
+    ```
 
 
 Connect to the instance:
@@ -109,13 +101,7 @@ Prometheus Portal: localhost:9090
 
 
 
-Bridge Networking Tutorial:
-https://www.tutorialworks.com/container-networking/
 
-
-
-Simulate CRDB multi-region cluster on localhost
-https://www.cockroachlabs.com/blog/simulate-cockroachdb-cluster-localhost-docker/
 
 
 
@@ -150,6 +136,14 @@ cockroach workload run bank "postgresql://root@crdb-node02:26257/bank?sslcert=%2
 
 // NODE 03 Example
 cockroach workload run bank "postgresql://root@crdb-node03:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
+
+
+## Guides and References 
+ - Certificates: https://www.cockroachlabs.com/docs/v22.1/cockroach-cert
+ - Simulate CRDB multi-region cluster on localhost: https://www.cockroachlabs.com/blog/simulate-cockroachdb-cluster-localhost-docker/
+ - CRDB clusters on a MAC: https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.html
+ - dockerhub (cockroachdb/cockroach): https://hub.docker.com/r/cockroachdb/cockroach
+ - Docker bridge networking: https://www.tutorialworks.com/container-networking/
 
 
 
