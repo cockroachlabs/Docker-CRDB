@@ -1,27 +1,48 @@
-# Docker-CRDB
- 
+# Alerting service
+This container interfaces with Grafana using the *Alert Manager*.
 
-docker build . -t world2mark/alerts-app
 
-This will build the docker image saved into the local Docker repo
-(note that it's saved as none/nonde)
-
-Also note that docker-compose.yml indicates a build rather than a public repo image.
-
-docker-compose build
-vs
+## Building and debugging
+```
 docker-compose up -d
-Both build the image if it doesn't exist.
+```
+This will build the image if it doesn't exist, and start the container.
 
 
-Localhost running & Dev:
+To operate this service in a localhost environment (run & debug), you will need to do a one-time NPM installation:
+```
+npm install
+```
 
+This will install the dependencies and allow you to run this app outside of Docker using the following command.
+```
 PORT=4567 node .
+```
+Note that you can change the port number to any free port on your system.
 
+## Configuring an alert
+When editing an alert rule, the following **Custom Labels** in the grafana UI need to be completed to enable alerting.
 
+**Note that case-sensitivity is critical in these labels**
 
-Alerting contact point for CONTAINER
+1. **Email** = mark@somewhere.com
+2. **RecipientName** = Mark (company pager)
+3. **Sendgrid_Api_Key** = SGxxxxxxxxxxxxxxxxxxx
+4. **PhoneNumber** = +16135556666
+5. **SMS_RootNumber** = +16135556666
+6. **SMS_Key** = xxxxxxxxxxxxxxxxxx
+
+Description of these fields:
+- *Email* is the destination for this alert
+- *RecipientName* is the display-name of the recipient
+- *Sengrid_Api_Key* is the API key for SendGrid to operate the email service
+- *PhoneNumber* is the destination number where to send the SMS
+- *SMS_RootNumber* is the source phone number (Twilio assigns a number to your account that must be used)
+- *SMS_Key* is the API key for Twilio to operate the SMS service
+
+## Endpoints for Dockerized deployments
+Alerting contact point for CONTAINER within the private network
 http://alerts:4567
 
-Alerting contact point for localhost DEVELOPMENT
-http://host.docker.internal:4568
+Alerting contact point for localhost access
+http://host.docker.internal:4567

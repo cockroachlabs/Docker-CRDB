@@ -30,6 +30,12 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
 ## Pre-Reqs: installation, binaries, tools, certificate generation
 * **Docker, Docker Desktop, Docker-Compose:**
     Ensure that you install and verify that Docker, Docker Desktop, and Docker-Compose are operational
+* **NodeJS:**
+    https://nodejs.org/en/ is the homepage for runtimes, binaries.
+    Please install this run-time platform if you wish to use Alerts.
+* **Alert web services:**
+    Alerting relies on Twilio cloud services, and will require API keys to operate.
+    SMS is a paid service, whil the email service offers 100 sends per month for free.
 * **CRDB Installed:**
     Please visit https://github.com/cockroachdb/cockroach and download the latest CRDB installation (22.1.0 at the time of this commit)
 * **Certificates for secure mode:**
@@ -44,8 +50,8 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
       cockroach --certs-dir=certs cert list
 
       ```
-    - dulpicate the ***ca*** and ***certs*** folders for the **crdb02** and **crdb03** containers
-    - The **certs list** command in the last step should return the list of certificates similar to this:
+    - The ***ca*** and ***certs*** folders are populated with certs & keys. Just copy these 2 folders and paste them into the **crdb02** and **crdb03** folders to complete the cluster security settings.
+    - The **certs list** command in the last step is informative, and should return the list of certificates similar to this:
     ```
     markzlamal@crl_my_laptop crdb01 % cockroach --certs-dir=certs cert list 
     Certificate directory: certs
@@ -89,7 +95,7 @@ Additional options can be specified to define a unique subnet range if desired.
     docker-compose up -d
 
     ```
-
+Note that the **alerts** container is built, while the others are pulled from public repositories.
 
 Connect to the instance:
 cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable"
