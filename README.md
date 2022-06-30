@@ -75,7 +75,6 @@ Different sequences will work, but you will needlessly generate logging related 
 Each component folder contains a **docker-compose.yml** file that is the descriptor for the container & image.
 
 
-
 1. git clone https://github.com/world2mark/Docker-CRDB.git
 
 2. Create a user-defined bridge network
