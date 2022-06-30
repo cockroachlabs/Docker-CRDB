@@ -35,7 +35,7 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
     Please install this run-time platform if you wish to use Alerts.
 * **Alert web services:**
     Alerting relies on Twilio cloud services, and will require API keys to operate.
-    SMS is a paid service, whil the email service offers 100 sends per month for free.
+    SMS is a paid service, while the email service offers 100 sends per month for free.
 * **CRDB Installed:**
     Please visit https://github.com/cockroachdb/cockroach and download the latest CRDB installation (22.1.0 at the time of this commit)
 * **Certificates for secure mode:**
@@ -97,50 +97,25 @@ Additional options can be specified to define a unique subnet range if desired.
     ```
 Note that the **alerts** container is built, while the others are pulled from public repositories.
 
-Connect to the instance:
-cockroach sql --url "postgresql://root@127.0.0.1:26257/defaultdb?sslmode=disable"
+## Endpoints for Dockerized deployments
+**Alerting Web UI**
+http://localhost:4567
 
+**Grafana UI**
+http://localhost:3000
 
+**Prometheus UI**
+http://localhost:9090
 
-Prometheus Portal: localhost:9090
+**CRDB Management console**
+http://localhost:8080
+http://localhost:8081
+http://localhost:8082
 
-
-
-
-
-
-
-
-## Direct PostgreSQL access to a running node (example: Node01)
-There are 2 ways to access the database
-* Using your command shell, which requires the *cockroach* binary installed on your system
-  ```
-  Folder: ...\Docker-CRDB\crdb01
-  Command: cockroach sql --url "postgresql://root@crdb-node01:26257/defaultdb?sslcert=certs%2Fclient.root.crt&sslkey=certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=certs%2Fca.crt"
-
-  ```
- is using the SSH feature using Docker-Desktop, the other is
-cockroach sql --url "postgresql://root@crdb-node01:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
-
-
-
-
-cockroach sql --url "postgresql://mark@localhost:26257?sslcert=%2Fcockroach%2Flocalhost-certs%2Fclient.root.crt&sslkey=%2Fcockroach%2Flocalhost-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=localhost-certs%2Fca.crt"
-
-
-cockroach workload init bank "postgresql://mark:zlamal@localhost:26257?sslcert=%2Fcockroach%2Flocalhost-certs%2Fclient.root.crt&sslkey=%2Fcockroach%2Flocalhost-certs%2Fclient.root.key&sslmode=verify-full&sslrootcert=localhost-certs%2Fca.crt"
-
-
-// NODE 01 Example
-cockroach workload run bank "postgresql://root@crdb-node01:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
-
-
-// NODE 02 Example
-cockroach workload run bank "postgresql://root@crdb-node02:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
-
-
-// NODE 03 Example
-cockroach workload run bank "postgresql://root@crdb-node03:26257/bank?sslcert=%2Fcockroach%2Fcerts%2Fclient.root.crt&sslkey=%2Fcockroach%2Fcerts%2Fclient.root.key&sslmode=verify-full&sslrootcert=%2Fcockroach%2Fcerts%2Fca.crt"
+**CRDB Interactive SQL channels**
+http://localhost:26257
+http://localhost:26258
+http://localhost:26259
 
 
 ## Guides and References 
@@ -149,7 +124,6 @@ cockroach workload run bank "postgresql://root@crdb-node03:26257/bank?sslcert=%2
  - CRDB clusters on a MAC: https://www.cockroachlabs.com/docs/stable/start-a-local-cluster-in-docker-mac.html
  - dockerhub (cockroachdb/cockroach): https://hub.docker.com/r/cockroachdb/cockroach
  - Docker bridge networking: https://www.tutorialworks.com/container-networking/
-
 
 
 <p align="center">
