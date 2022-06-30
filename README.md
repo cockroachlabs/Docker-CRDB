@@ -39,14 +39,24 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
       mkdir certs
       mkdir ca
       cockroach cert create-ca --certs-dir=certs --ca-key=ca/ca.key
-      cockroach cert create-node crlMBP-C02FL0LJMD6TMzE1.local --ca-key=ca/ca.key --certs-dir=certs
+      cockroach cert create-node crdb-node01 crdb-node02 crdb-node03 --ca-key=ca/ca.key --certs-dir=certs
       cockroach cert create-client root --certs-dir=certs --ca-key=ca/ca.key
+      cockroach --certs-dir=certs cert list
 
       ```
     - dulpicate the ***ca*** and ***certs*** folders for the **crdb02** and **crdb03** containers
     - For a general overview into generating self-signed certificates, visit https://www.cockroachlabs.com/docs/v22.1/cockroach-cert 
-* 
-    
+    - The **certs list** command in the last step should return the list of certificates similar to this:
+    ```
+    markzlamal@crlMBP-C02FL0LJMD6TMzE1 crdb01 % cockroach --certs-dir=certs cert list 
+    Certificate directory: certs
+    Usage  | Certificate File |    Key File     |  Expires   |                     Notes                      | Error
+    ---------+------------------+-----------------+------------+------------------------------------------------+--------
+    CA     | ca.crt           |                 | 2032/07/07 | num certs: 1                                   |
+    Node   | node.crt         | node.key        | 2027/07/04 | addresses: crdb-node01,crdb-node02,crdb-node03 |
+    Client | client.root.crt  | client.root.key | 2027/07/04 | user: root                                     |
+    (3 rows)
+    ```
 
 ## Start a Cluster in Docker
 The *start sequence* of your containers is important due to the networking expectations between the components.
