@@ -13,11 +13,13 @@ To operate this service in a localhost environment (run & debug), you will need 
 ```
 npm install
 ```
+This will install the dependencies.
 
-This will install the dependencies and allow you to run this app outside of Docker using the following command.
+To run this app outside of Docker, use the following command.
 ```
 PORT=4567 node .
 ```
+This automatically set the PORT environment variable in the NodeJS runtime.
 Note that you can change the port number to any free port on your system.
 
 ## Configuring an alert
@@ -45,4 +47,4 @@ Alerting contact point within the private network
 - http://alerts:4567
 
 Alerting contact point for localhost access
-- http://host.docker.internal:4567
+- http://localhost:4567
