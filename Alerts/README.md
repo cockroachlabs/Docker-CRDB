@@ -42,7 +42,7 @@ Description of these fields:
 
 ## Endpoints for Dockerized deployments
 Alerting contact point within the private network
-http://alerts:4567
+- http://alerts:4567
 
 Alerting contact point for localhost access
-http://host.docker.internal:4567
+- http://host.docker.internal:4567

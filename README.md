@@ -29,7 +29,8 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
 
 ## Pre-Reqs: installation, binaries, tools, certificate generation
 * **Docker, Docker Desktop, Docker-Compose:**
-    Ensure that you install and verify that Docker, Docker Desktop, and Docker-Compose are operational
+    Ensure that you install Docker, Docker Desktop, and Docker-Compose.
+    Verify that these services are operational.
 * **NodeJS:**
     https://nodejs.org/en/ is the homepage for runtimes, binaries.
     Please install this run-time platform if you wish to use Alerts.
@@ -99,23 +100,23 @@ Note that the **alerts** container is built, while the others are pulled from pu
 
 ## Endpoints for Dockerized deployments
 **Alerting Web UI**
-http://localhost:4567
+- http://localhost:4567
 
 **Grafana UI**
-http://localhost:3000
+- http://localhost:3000
 
 **Prometheus UI**
-http://localhost:9090
+- http://localhost:9090
 
 **CRDB Management console**
-http://localhost:8080
-http://localhost:8081
-http://localhost:8082
+- http://localhost:8080
+- http://localhost:8081
+- http://localhost:8082
 
 **CRDB Interactive SQL channels**
-http://localhost:26257
-http://localhost:26258
-http://localhost:26259
+- postgresql://localhost:26257 (connection string)
+- postgresql://localhost:26258 (connection string)
+- postgresql://localhost:26259 (connection string)
 
 
 ## Guides and References 
