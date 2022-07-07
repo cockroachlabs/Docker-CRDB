@@ -14,6 +14,7 @@ const Typical_Event = {
         {
             status: 'firing',
             labels: {
+                DisableNotifications: 'yes',
                 PhoneNumber: '+1<my phone number>',
                 RecipientName: 'Mark\'s pager',
                 Email: 'Mark\'s Cockroach labs email',

@@ -3,6 +3,7 @@ cockroach-data
 output
 ca
 certs
+.DS_Store
 
 # Logs
 logs
