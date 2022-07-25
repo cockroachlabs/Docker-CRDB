@@ -56,14 +56,24 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
     ```
     markzlamal@crl_my_laptop crdb01 % cockroach --certs-dir=certs cert list 
     Certificate directory: certs
-    Usage  | Certificate File |    Key File     |  Expires   |                     Notes                      | Error
-    ---------+------------------+-----------------+------------+------------------------------------------------+--------
-    CA     | ca.crt           |                 | 2032/07/07 | num certs: 1                                   |
-    Node   | node.crt         | node.key        | 2027/07/04 | addresses: crdb-node01,crdb-node02,crdb-node03 |
-    Client | client.root.crt  | client.root.key | 2027/07/04 | user: root                                     |
+    Usage  | Certificate File |    Key File     |  Expires   |                     Notes                                | Error
+    -------+------------------+-----------------+------------+----------------------------------------------------------+--------
+    CA     | ca.crt           |                 | 2032/07/07 | num certs: 1                                             |
+    Node   | node.crt         | node.key        | 2027/07/04 | addresses: localhost,crdb-node01,crdb-node02,crdb-node03 |
+    Client | client.root.crt  | client.root.key | 2027/07/04 | user: root                                               |
     (3 rows)
     ```
-
+* **Create user account (optional one-time step):**
+    To avoid using **root** user account and relying on root CA keys, create yourself an admin-granted named user account to operate your CRDB instance.
+    You will need to connect to any of the CRDB instances in your cluster using root for this one-time process as follows:
+    ```
+    cockroach sql --url "postgresql://root@localhost:26257/bank?sslcert=certs/client.root.crt&sslkey=certs/client.root.key&sslmode=verify-full&sslrootcert=certs/ca.crt"
+    ```
+    ...and then run the following user-creation commands (example is *mark* and *zlamal* below):
+    ```
+    CREATE USER mark WITH PASSWORD 'zlamal';
+    GRANT admin TO mark;
+    ```
 ## Start the cluster + logging in Docker
 The *start sequence* of your containers is important due to the networking expectations between the components.
 This project expects containers to be launched in the following order.
