@@ -46,7 +46,7 @@ In this example, Twilio is used to send email and SMS messages when Grafana trig
       mkdir certs
       mkdir ca
       cockroach cert create-ca --certs-dir=certs --ca-key=ca/ca.key
-      cockroach cert create-node crdb-node01 crdb-node02 crdb-node03 --ca-key=ca/ca.key --certs-dir=certs
+      cockroach cert create-node localhost crdb-node01 crdb-node02 crdb-node03 --ca-key=ca/ca.key --certs-dir=certs
       cockroach cert create-client root --certs-dir=certs --ca-key=ca/ca.key
       cockroach --certs-dir=certs cert list
 
