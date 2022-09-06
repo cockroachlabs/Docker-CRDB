@@ -2,14 +2,14 @@ file-defaults:
   max-file-size: 10MiB
   max-group-size: 100MiB
   buffered-writes: true
-  filter: INFO
+  filter: NONE
   format: crdb-v2
   redact: false
   redactable: true
   exit-on-error: true
   auditable: false
 fluent-defaults:
-  filter: INFO
+  # filter: NONE
   # format: json-fluent # default
   redact: false
   redactable: true
@@ -17,13 +17,13 @@ fluent-defaults:
   auditable: false
 sinks:
   fluent-servers:
-   myhost:
-     channels: [DEV, OPS, HEALTH]
-     address: fluent-02:5170
-     net: tcp
+    myhost:
+      channels: all
+      address: fluent-02:5170
+      net: tcp
   file-groups:
     default:  # will output to cockroach.log
-      channels: [DEV, OPS, HEALTH, SQL_SCHEMA, USER_ADMIN, PRIVILEGES]
+      channels: all
     storage: # will output to cockroach-storage.log
       channels: [STORAGE]
     sensitive-access:

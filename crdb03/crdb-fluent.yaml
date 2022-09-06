@@ -18,7 +18,7 @@ fluent-defaults:
 sinks:
   fluent-servers:
    myhost:
-     channels: [DEV, OPS, HEALTH]
+     channels: [DEV, OPS, HEALTH, STORAGE, SQL_SCHEMA, SESSIONS]
      address: fluent-03:5170
      net: tcp
   file-groups:
